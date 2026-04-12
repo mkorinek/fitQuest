@@ -1,98 +1,167 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { BasicButton } from "@/components/ui/BasicButton";
+import { BasicButton2 } from "@/components/ui/BasicButton2";
+import { useRef, useState } from "react";
+import {
+  Animated,
+  Image,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+  import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+  import { SafeAreaView } from "react-native-safe-area-context";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+type sectionBData = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const [pageHeight, setPageHeight] = useState(0);
+  const [toggled, setToggled] = useState(false);
+  const [title, setTitle] = useState("Klikniiii na mě");
+  const [savedText, setSavedText] = useState("");
+  const [sectionB, setSectionB] = useState<sectionBData>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+  const scrollRef = useRef<ScrollView>(null);
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const handleBG = () => {
+    setToggled(!toggled);
+    Animated.timing(animatedValue, {
+      toValue: toggled ? 0 : 1,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  };
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const handleTitleChange = () => {
+    setTitle(savedText || "Home Screen");
+    setSavedText("");
+  };
+
+  const handleSavedText = (text: string) => {
+    setSavedText(text);
+  };
+
+  const bgColor = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["#f0f0f0", "#a0a0a0"],
+  });
+
+  return (
+    <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
+      <KeyboardAwareScrollView
+        onLayout={(e) => setPageHeight(e.nativeEvent.layout.height)}
+        bottomOffset={50}
+        ref={scrollRef}
+      >
+        {pageHeight > 0 && (
+          <>
+            <Animated.View
+              style={[
+                styles.view1,
+                styles.view,
+                { height: pageHeight, backgroundColor: bgColor },
+              ]}
+              onTouchStart={handleBG}
+            >
+              <Text
+                onPress={() =>
+                  scrollRef?.current?.scrollTo({
+                    y: sectionB.y,
+                    animated: true,
+                  })
+                }
+                style={styles.title}
+              >
+                {title}
+              </Text>
+            </Animated.View>
+            <View
+              onLayout={(e) => setSectionB(e.nativeEvent.layout)}
+              style={[styles.view2, styles.view, { height: pageHeight }]}
+            >
+              <View
+                style={styles.view}
+              >
+                <TextInput
+                  value={savedText}
+                  placeholder="Search"
+                  keyboardAppearance="dark"
+                  onChangeText={(text) => handleSavedText(text)}
+                  autoCorrect={false}
+                  placeholderTextColor="#999"
+                  style={styles.input}
+                />
+                <BasicButton
+                  onPress={() => {
+                    handleTitleChange();
+                    scrollRef?.current?.scrollTo({ y: 0, animated: true });
+                  }}
+                  title="Change BG"
+                />
+              </View>
+
+              {/* <BasicButton2
+                  onPress={() => {
+                    handleTitleChange();
+                    scrollRef?.current?.scrollTo({ y: 0, animated: true });
+                  }}
+                  title="Change BG"
+                /> */}
+            </View>
+          </>
+        )}
+      </KeyboardAwareScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  title: {
+    width: "100%",
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  view: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  view1: {
+    backgroundColor: "#f0f0f0",
+  },
+  view2: {
+    backgroundColor: "#e0e0e0",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  image: {
+    width: "auto",
+    height: "100%",
+    resizeMode: "contain",
+    padding: 10,
+  },
+  input: {
+    width: "80%",
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    marginBottom: 20,
+    backgroundColor: "#fff",
   },
 });
