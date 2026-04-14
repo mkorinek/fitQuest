@@ -1,19 +1,17 @@
+import { ThemedView } from "@/components/themed-view";
 import { BasicButton } from "@/components/ui/BasicButton";
-import { BasicButton2 } from "@/components/ui/BasicButton2";
+import { router } from "expo-router";
 import { useRef, useState } from "react";
 import {
   Animated,
-  Image,
-  Platform,
-  Pressable,
   ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from "react-native";
-  import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
-  import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type sectionBData = {
   x: number;
@@ -65,63 +63,33 @@ export default function HomeScreen() {
         bottomOffset={50}
         ref={scrollRef}
       >
-        {pageHeight > 0 && (
-          <>
-            <Animated.View
-              style={[
-                styles.view1,
-                styles.view,
-                { height: pageHeight, backgroundColor: bgColor },
-              ]}
-              onTouchStart={handleBG}
-            >
-              <Text
-                onPress={() =>
-                  scrollRef?.current?.scrollTo({
-                    y: sectionB.y,
-                    animated: true,
-                  })
-                }
-                style={styles.title}
-              >
-                {title}
-              </Text>
-            </Animated.View>
-            <View
-              onLayout={(e) => setSectionB(e.nativeEvent.layout)}
-              style={[styles.view2, styles.view, { height: pageHeight }]}
-            >
-              <View
-                style={styles.view}
-              >
-                <TextInput
-                  value={savedText}
-                  placeholder="Search"
-                  keyboardAppearance="dark"
-                  onChangeText={(text) => handleSavedText(text)}
-                  autoCorrect={false}
-                  placeholderTextColor="#999"
-                  style={styles.input}
-                />
-                <BasicButton
-                  onPress={() => {
-                    handleTitleChange();
-                    scrollRef?.current?.scrollTo({ y: 0, animated: true });
-                  }}
-                  title="Change BG"
-                />
-              </View>
-
-              {/* <BasicButton2
-                  onPress={() => {
-                    handleTitleChange();
-                    scrollRef?.current?.scrollTo({ y: 0, animated: true });
-                  }}
-                  title="Change BG"
-                /> */}
-            </View>
-          </>
-        )}
+        <>
+          <ThemedView
+            onLayout={(e) => setSectionB(e.nativeEvent.layout)}
+            style={[styles.view2, styles.view, { height: pageHeight }]}
+          >
+            <ThemedView style={styles.view}>
+              <BasicButton
+                onPress={() => {
+                  router.push("/workouts");
+                }}
+                title="Workouts"
+              />
+              <BasicButton
+                onPress={() => {
+                  router.push("/workout/123");
+                }}
+                title="Workout 123"
+              />
+              <BasicButton
+                onPress={() => {
+                  router.push("/level-up");
+                }}
+                title="Level up!"
+              />
+            </ThemedView>
+          </ThemedView>
+        </>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

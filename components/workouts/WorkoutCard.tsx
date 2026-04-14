@@ -1,6 +1,10 @@
 import { Workout } from "@/data/workouts";
 import { StyleSheet, Text, View, Pressable, Platform } from "react-native";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { useTheme } from "@react-navigation/native";
+import { ThemedText } from "../themed-text";
+import { ThemedView } from "../themed-view";
+import { router } from "expo-router";
 
 const WorkoutCard = ({
   data,
@@ -9,27 +13,37 @@ const WorkoutCard = ({
   data: Workout;
   onDelete: (id: string) => void;
 }) => {
+  const { colors } = useTheme();
   return (
-    <View style={styles.card} id={data.id}>
-      <Text style={styles.cardTitle}>{data.name}</Text>
-      <Text style={styles.cardDetails}>Duration: {data.duration || "N/A"}</Text>
-      <Text style={styles.cardDetails}>
+    <ThemedView
+      style={[styles.card, { backgroundColor: colors.card }]}
+      id={data.id}
+    >
+      <Pressable onPress={() => router.push(`/workout/${data.id}`)}>
+        <ThemedText style={styles.cardTitle}>{data.name} </ThemedText>
+      </Pressable>
+      <ThemedText style={styles.cardDetails}>
+        Duration: {data.duration || "N/A"}
+        
+      </ThemedText>
+      <ThemedText style={styles.cardDetails}>
         Difficulty: {data.difficulty || "N/A"}
-      </Text>
-      <Text style={styles.cardDetails}>Category: {data.category || "N/A"}</Text>
-      <Text style={styles.cardDetails}>
+      </ThemedText>
+      <ThemedText style={styles.cardDetails}>
+        Category: {data.category || "N/A"}
+      </ThemedText>
+      <ThemedText style={styles.cardDetails}>
         Exercises: {data.exercises || "N/A"}
-      </Text>
+      </ThemedText>
       <Pressable onPress={() => onDelete(data.id)} style={styles.trash}>
         <IconSymbol name="trash" size={20} color="red" />
       </Pressable>
-    </View>
+    </ThemedView>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 20,
     marginBottom: 15,
