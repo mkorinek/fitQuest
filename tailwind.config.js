@@ -1,31 +1,30 @@
-/* Tailwind scans the files listed in content to find which classes you       
-  actually use. Empty array = no classes = nothing works. You also need
-  NativeWind's preset, which teaches Tailwind about React Native's style model (no
-   hover: on native, different color opacity handling, etc). */
 /** @type {import('tailwindcss').Config} */
-const { colors, spacing, borderRadius } = require("./constants/tokens");
+const { spacing, borderRadius } = require("./constants/tokens");
+
+const withVar = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
+
 module.exports = {
   content: [
     "./app/**/*.{js,jsx,ts,tsx}",
     "./components/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: "class",
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
       colors: {
-        // RPG-themed color palette
-        primary: colors.primary,
-        secondary: colors.secondary,
-        xp: colors.xp,
-        health: colors.health,
-        stamina: colors.stamina,
-        mana: colors.mana,
-        background: colors.background,
-        surface: colors.surface,
+        primary: withVar("primary"),
+        secondary: withVar("secondary"),
+        xp: withVar("xp"),
+        health: withVar("health"),
+        stamina: withVar("stamina"),
+        mana: withVar("mana"),
+        background: withVar("background"),
+        surface: withVar("surface"),
         text: {
-          primary: colors.text,
-          secondary: colors.textSecondary
-        }
+          primary: withVar("text"),
+          secondary: withVar("text-secondary"),
+        },
       },
       spacing: {
         xs: spacing.xs,
@@ -43,5 +42,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
-
+};

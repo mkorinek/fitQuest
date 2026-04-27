@@ -1,15 +1,32 @@
-/* This is where Tailwind's base/components/utilities directives live.        
-  NativeWind's Metro transformer reads this file, compiles it with Tailwind, and
-  turns the result into runtime styles for native. Without it, className strings  
-  have nothing to resolve to. Also you have to import global.css in your app. */
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
-#root {
-  background-color: red;
-  min-height: 100%;
+@layer base {
+  :root {
+    --color-primary: 232 90 43;
+    --color-secondary: 109 40 217;
+    --color-xp: 184 134 11;
+    --color-health: 220 38 38;
+    --color-stamina: 21 128 61;
+    --color-mana: 29 78 216;
+    --color-background: 246 248 250;
+    --color-surface: 255 255 255;
+    --color-text: 15 23 42;
+    --color-text-secondary: 71 85 105;
+  }
+
+  .dark:root,
+  .dark {
+    --color-primary: 255 107 53;
+    --color-secondary: 167 139 250;
+    --color-xp: 252 211 77;
+    --color-health: 248 113 113;
+    --color-stamina: 74 222 128;
+    --color-mana: 96 165 250;
+    --color-background: 13 17 23;
+    --color-surface: 26 31 42;
+    --color-text: 240 246 252;
+    --color-text-secondary: 148 163 184;
+  }
 }

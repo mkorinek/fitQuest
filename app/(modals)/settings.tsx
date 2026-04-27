@@ -1,12 +1,22 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text } from "react-native";
+import { BasicButton } from '@/components/ui/BasicButton';
+import { useColorScheme } from 'nativewind';
+import { Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function SettingsModal() {
+  const { colorScheme, setColorScheme, toggleColorScheme } = useColorScheme();
+
   return (
     <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
     >
-      <Text style={{ fontSize: 24, fontWeight: "bold" }}>Settings</Text>
+      <Text className="text-2xl font-bold text-text-primary">Settings</Text>
+      <View>
+        <BasicButton
+          onPress={toggleColorScheme}
+          title={colorScheme === 'dark' ? 'Change to light' : 'Change to dark'}
+        />
+      </View>
     </SafeAreaView>
   );
 }

@@ -1,9 +1,9 @@
-import { View } from "react-native";
+import { View } from 'react-native';
 
 export default function AppView({
   children,
   padding = true,
-  className = "",
+  className = '',
 }: {
   children: React.ReactNode;
   padding?: boolean;
@@ -12,7 +12,7 @@ export default function AppView({
   return (
     <View
       style={{ padding: padding ? 16 : 0 }}
-      className={`bg-surface rounded-lg shadow-[0_1px_5px] shadow-mana/10 ${className}`}
+      className={`rounded-lg bg-surface ${className}`}
     >
       {children}
     </View>

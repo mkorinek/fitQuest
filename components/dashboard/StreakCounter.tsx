@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 
 interface StreakCounterProps {
   streak: number;
@@ -6,11 +6,11 @@ interface StreakCounterProps {
 
 export default function StreakCounter({ streak }: StreakCounterProps) {
   return (
-    <View className="items-center justify-between flex-row">
-      <Text className="text-white text-2xl items-center leading-[1] justify-center">
+    <View className="flex-row items-center justify-between">
+      <Text className="items-center justify-center text-2xl leading-[1] text-text-primary">
         Daily streak
       </Text>
-      <Text className="text-white text-4xl font-bold leading-[1]">
+      <Text className="text-4xl font-bold leading-[1] text-text-primary">
         {streak || 0}
       </Text>
     </View>

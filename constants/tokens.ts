@@ -1,16 +1,29 @@
 const tokens = {
   colors: {
-    // RPG-themed color palette
-    primary: "#FF6B35", // Fiery orange (energy, action)
-    secondary: "#7B2FBE", // Royal purple (achievements, rare)
-    xp: "#FFD700", // Gold (XP, rewards)
-    health: "#FF4444", // Red (health/HP)
-    stamina: "#44CC44", // Green (stamina/endurance)
-    mana: "#4488FF", // Blue (flexibility/yoga)
-    background: "#0D1117", // Dark background
-    surface: "#161B22", // Card background
-    text: "#F0F6FC", // Primary text
-    textSecondary: "#8B949E",
+    light: {
+      primary: "#E85A2B",
+      secondary: "#6D28D9",
+      xp: "#B8860B",
+      health: "#DC2626",
+      stamina: "#15803D",
+      mana: "#1D4ED8",
+      background: "#F6F8FA",
+      surface: "#FFFFFF",
+      text: "#0F172A",
+      textSecondary: "#475569",
+    },
+    dark: {
+      primary: "#FF6B35",
+      secondary: "#A78BFA",
+      xp: "#FCD34D",
+      health: "#F87171",
+      stamina: "#4ADE80",
+      mana: "#60A5FA",
+      background: "#0D1117",
+      surface: "#1A1F2A",
+      text: "#F0F6FC",
+      textSecondary: "#94A3B8",
+    },
   },
   spacing: {
     xs: 4,
@@ -29,3 +42,5 @@ const tokens = {
 
 export default tokens;
 export const { colors, spacing, borderRadius } = tokens;
+export const colorsLight = tokens.colors.light;
+export const colorsDark = tokens.colors.dark;
