@@ -1,14 +1,14 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedText } from "@/components/themed-text";
+import { Text } from "react-native";
 
 export default function SocialScreen() {
   return (
     <SafeAreaView
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
-      <ThemedText style={{ fontSize: 24, fontWeight: "bold" }}>
+      <Text style={{ fontSize: 24, fontWeight: "bold" }}>
         Social Screen
-      </ThemedText>
+      </Text>
     </SafeAreaView>
   );
 }

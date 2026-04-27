@@ -5,11 +5,10 @@ import { WORKOUTS, Workout } from "@/data/workouts";
 import {
   FlatList,
   KeyboardAvoidingView,
-  StyleSheet,
   TextInput,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ThemedView } from "@/components/themed-view";
 import { useTheme } from "@react-navigation/native";
 
 export default function HomeScreen() {
@@ -39,7 +38,7 @@ export default function HomeScreen() {
         style={{ height: "auto", paddingVertical: 20, marginBottom: 20, backgroundColor: colors.card, borderRadius: 10 }}
         behavior="padding"
       >
-        <ThemedView style={{ gap: 10, margin: 10, backgroundColor: colors.card }}>
+        <View style={{ gap: 10, margin: 10, backgroundColor: colors.card }}>
           <TextInput
             placeholder="Workout name"
             style={{ borderWidth: 1, padding: 8, borderRadius: 5, backgroundColor: colors.background, color: colors.text }}
@@ -52,7 +51,7 @@ export default function HomeScreen() {
             value={workoutDuration}
             onChangeText={setWorkoutDuration}
           />
-        </ThemedView>
+        </View>
         <BasicButton
           title="Add Workout"
           onPress={() => handleAddWorkout(workoutName, workoutDuration)}

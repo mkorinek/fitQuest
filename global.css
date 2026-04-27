@@ -1,0 +1,15 @@
+/* This is where Tailwind's base/components/utilities directives live.        
+  NativeWind's Metro transformer reads this file, compiles it with Tailwind, and
+  turns the result into runtime styles for native. Without it, className strings  
+  have nothing to resolve to. Also you have to import global.css in your app. */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  background-color: red;
+  min-height: 100%;
+}
