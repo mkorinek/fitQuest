@@ -1,16 +1,19 @@
+import { LevelUpModal } from '@/components/modals/level-up';
+import { colorsDark, colorsLight } from '@/constants/tokens';
+import { QueryProvider } from '@/providers/QueryProvider';
+import { usePlayerStore } from '@/stores/usePlayerStore';
 import {
   DarkTheme,
   DefaultTheme,
   ThemeProvider,
 } from '@react-navigation/native';
-import '../global.css';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { useColorScheme } from 'nativewind';
-import { colorsLight, colorsDark } from '@/constants/tokens';
-import { QueryProvider } from '@/providers/QueryProvider';
+import React, { useEffect, useRef, useState } from 'react';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
+import 'react-native-reanimated';
+import '../global.css';
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
@@ -29,6 +32,16 @@ export default function RootLayout() {
       border: palette.surface,
     },
   };
+
+  const player = usePlayerStore();
+  const prevLevel = useRef(player.level);
+  const [modalVisible, setModalVisible] = useState(false);
+  useEffect(() => {
+    if (player.level > prevLevel.current) {
+      setModalVisible(true);
+    }
+    prevLevel.current = player.level;
+  }, [player.level]);
 
   return (
     <QueryProvider>
@@ -50,6 +63,11 @@ export default function RootLayout() {
             />
           </Stack>
           <StatusBar style="auto" />
+          <LevelUpModal
+            visible={modalVisible}
+            newLevel={player.level}
+            onClose={() => setModalVisible(false)}
+          />
         </ThemeProvider>
       </KeyboardProvider>
     </QueryProvider>

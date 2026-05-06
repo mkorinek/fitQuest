@@ -6,6 +6,7 @@ import StreakCounter from './StreakCounter';
 
 export default function Dashboard() {
   const player = usePlayerStore();
+
   return (
     <View className="flex-1 gap-4 p-8">
       <View className="flex flex-row justify-between">

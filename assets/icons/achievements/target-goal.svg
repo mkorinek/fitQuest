@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Goal Hit — Target</title>
+  <!-- outer ring -->
+  <circle cx="32" cy="32" r="26" fill="#1A2238"/>
+  <circle cx="32" cy="32" r="22" fill="#FFFFFF"/>
+  <!-- red ring -->
+  <circle cx="32" cy="32" r="18" fill="#E63946"/>
+  <!-- white ring -->
+  <circle cx="32" cy="32" r="14" fill="#FFFFFF"/>
+  <!-- inner red -->
+  <circle cx="32" cy="32" r="10" fill="#E63946"/>
+  <!-- bullseye -->
+  <circle cx="32" cy="32" r="5" fill="#FFE07A"/>
+  <!-- arrow shaft -->
+  <rect x="36" y="30" width="22" height="4" fill="#8B5A2B" transform="rotate(-30 47 32)"/>
+  <!-- arrow fletching -->
+  <path d="M54 24 L 60 22 L 58 28 Z" fill="#E63946" transform="rotate(-30 47 32)"/>
+  <!-- arrowhead at center -->
+  <path d="M30 30 L 36 32 L 30 34 L 32 32 Z" fill="#1A2238"/>
+</svg>

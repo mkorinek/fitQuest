@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>First Win — Trophy</title>
+  <!-- handles -->
+  <path d="M16 18 C 8 18, 6 30, 16 32 L 16 26 L 14 26 C 12 26, 12 22, 16 22 Z" fill="#E8A317"/>
+  <path d="M48 18 C 56 18, 58 30, 48 32 L 48 26 L 50 26 C 52 26, 52 22, 48 22 Z" fill="#E8A317"/>
+  <!-- cup body -->
+  <path d="M16 14 H 48 V 28 C 48 38, 42 44, 32 44 C 22 44, 16 38, 16 28 Z" fill="#F5C842"/>
+  <!-- cup highlight -->
+  <path d="M20 16 H 24 V 28 C 24 34, 26 38, 30 41 C 23 40, 20 34, 20 28 Z" fill="#FFE07A" opacity="0.7"/>
+  <!-- rim -->
+  <rect x="14" y="12" width="36" height="4" rx="1" fill="#C8881C"/>
+  <!-- star -->
+  <path d="M32 22 L 34 27 L 39 27 L 35 30 L 37 35 L 32 32 L 27 35 L 29 30 L 25 27 L 30 27 Z" fill="#FFFFFF"/>
+  <!-- stem -->
+  <rect x="29" y="44" width="6" height="6" fill="#C8881C"/>
+  <!-- base -->
+  <rect x="20" y="50" width="24" height="6" rx="1" fill="#1A2238"/>
+  <rect x="22" y="52" width="20" height="2" fill="#2C3856" opacity="0.5"/>
+</svg>
